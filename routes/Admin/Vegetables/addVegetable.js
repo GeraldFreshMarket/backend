@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const mongo = require("../../mongo_Connection");
+const mongo = require("../../../mongo_Connection");
 
 router.post("/", async function (req, res) {
   var message = [];

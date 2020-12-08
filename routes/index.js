@@ -6,17 +6,17 @@ const updateProfile = require("./Client/Profile/updateProfile");
 const orderDetails = require("./Client/Order/getOrder");
 const cancelOrder = require("./Client/Order/cancelOrder");
 
-const addVegetable = require("./Vegetables/addVegetable");
-const updateVegetable = require("./Vegetables/updateVegetable");
-const deleteVegetable = require("./Vegetables/deleteVegetable");
+const addVegetable = require("./Admin/Vegetables/addVegetable");
+const updateVegetable = require("./Admin/Vegetables/updateVegetable");
+const deleteVegetable = require("./Admin/Vegetables/deleteVegetable");
 const addCart = require("./Client/Cart/cartFile");
 
-const addFruit = require("./Fruits/addFruits");
-const deleteFruit = require("./Fruits/deleteFruits");
-const updateFruit = require("./Fruits/updateFruits");
+const addFruit = require("./Admin/Fruits/addFruits");
+const deleteFruit = require("./Admin/Fruits/deleteFruits");
+const updateFruit = require("./Admin/Fruits/updateFruits");
 
-const getVegetables = require("./Client/Order/getVegetables");
-const getFruits = require("./Client/Order/getFruits");
+const getVegetables = require("./Client/Vegetables/getVegetables");
+const getFruits = require("./Client/Fruits/getFruits");
 
 const viewOrder = require("./Orders/orders");
 const reset = require("./Client/Password/reset");
@@ -34,7 +34,7 @@ router.use("/getOrderDetails", orderDetails);
 router.use("/update", updateProfile);
 router.use("/cart", addCart);
 router.use("/cancelOrder", cancelOrder);
-router.use("/getfruits", getFruits);
+router.use("/getFruits", getFruits);
 router.use("/vieworder", viewOrder);
 router.use("/reset", reset);
 

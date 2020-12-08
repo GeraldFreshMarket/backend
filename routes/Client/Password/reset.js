@@ -3,6 +3,7 @@ const mongo = require("../../../mongo_Connection");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+const bcrypt = require("bcrypt");
 const ObjectID = require("mongodb").ObjectID;
 
 var transporter = nodemailer.createTransport({
@@ -23,7 +24,7 @@ router.post("/", function (req, res) {
       from: "no-reply@of.com",
       subject: "Password Reset",
       html: `<p>You requested for password reset</p>
-    <h3>Click in this <a href="http://localhost:3000/new-password/${token}">link</a> to reset password</h3>`,
+    <h3>Click in this <a href="https://gardenfresh.netlify.app/new-password/${token}">link</a> to reset password</h3>`,
     };
     db.find({ emailid: req.body.emailid }).toArray(function (error, result) {
       if (error) throw error;
@@ -55,7 +56,7 @@ router.post("/", function (req, res) {
 
 router.post("/new-password", function (req, res) {
   const db = mongo.get().collection("users");
-
+  req.body.newpassword = bcrypt.hashSync(req.body.newpassword, 12);
   db.find({ token: req.body.token, expireToken: { $gt: Date.now() } }).toArray(
     function (err, result) {
       if (result.length === 0) {

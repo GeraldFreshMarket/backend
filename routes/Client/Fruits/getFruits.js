@@ -13,14 +13,16 @@ router.get("/", function (req, res) {
 });
 
 router.get("/onefruit/:id", async function (req, res) {
-    const db = mongo.get().collection("fruits");
-  
-    await db
-      .find({ _id: ObjectId(req.params.id) })
-      .toArray(function (err, result) {
-        if (err) throw err;
-        else res.send(result);
-      });
-  });
+  const db = mongo.get().collection("fruits");
+
+  await db
+    .find({ _id: ObjectId(req.params.id) })
+    .toArray(function (err, result) {
+      if (err) throw err;
+      else if (result.length === 0) {
+        res.send("error");
+      } else res.send(result);
+    });
+});
 
 module.exports = router;

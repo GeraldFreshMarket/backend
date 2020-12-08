@@ -13,7 +13,6 @@ router.get("/", async function (req, res) {
 });
 
 router.post("/updateDelievery", async function (req, res) {
-  console.log(req.body);
   const db = mongo.get().collection("orders");
 
   await db
@@ -23,7 +22,8 @@ router.post("/updateDelievery", async function (req, res) {
       else {
         for (i = 0; i < result[0].order.length; i++) {
           if (req.body.index === i) {
-            result[0].order[i].delieverydate = req.body.date;
+            result[0].order[i].delieverydate = req.body.date,
+            result[0].order[i].status="delievered";
           }
         }
         db.update(

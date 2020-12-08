@@ -15,6 +15,7 @@ router.post("/", async function (req, res) {
       price: req.body.order[i].price,
       quantityneeded: req.body.order[i].quantityneeded,
       image: req.body.order[i].image,
+      status:"not_delievered",
       totalprice: req.body.order[i].totalprice,
       delieverydate: req.body.delieverydate,
     };
@@ -52,7 +53,7 @@ router.post("/", async function (req, res) {
                 { _id: ObjectId(req.body.user_id) },
                 { $push: { order } },
                 function (err, result) {
-                  if (err) result = err;
+                  if (err) throw err;
                 }
               );
             } else {
@@ -71,6 +72,13 @@ router.post("/", async function (req, res) {
                 mobile_number: result[0].mobilenumber,
                 order: [order],
               });
+              db.update(
+                { _id: ObjectId(req.body.user_id) },
+                { $push: { order } },
+                function (err, result) {
+                  if (err) throw err;
+                }
+              );
             }
           });
       }

@@ -20,7 +20,7 @@ router.post("/get-order", function (req, res) {
   db.find({ _id: ObjectId(req.body.id) }).toArray(function (err, result) {
     if (err) throw err;
     else {
-      res.json({ details: result[0].order});
+      res.send({ details: result[0].order});
     }
   });
 });
